@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biohome — Construção Modular</title>
+<meta name="description" content="Cabana modular 69m² entregue 100% pronta. Do fogão às placas solares. Fabricada em 90 dias, instalada em 1 a 2 dias, entregue em todo o Brasil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --preto: #000;
+  --branco: #fff;
+  --champagne: #C9A870;
+  --champagne-escuro: #a8894f;
+  --cinza-claro: #f5f4f1;
+  --cinza-medio: #888;
+  --texto: var(--preto);
+}
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--texto); background: var(--branco); }
+
+/* NAVBAR */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  transition: background .3s;
+}
+.navbar.scrolled { background: var(--preto); padding: 14px 40px; }
+.navbar img { height: 32px; width: auto; }
+.navbar a {
+  color: rgba(255,255,255,0.85); text-decoration: none;
+  font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; padding: 10px 20px; border-radius: 4px; font-weight: 500;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('images/fachada.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45);
+}
+.hero-content { position: relative; z-index: 1; max-width: 680px; padding: 0 24px; }
+.brand { font-size: 11px; letter-spacing: 6px; color: var(--champagne); margin-bottom: 32px; font-weight: 500; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 300; line-height: 1.15; margin-bottom: 20px; color: #fff; }
+.hero h1 strong { font-weight: 600; color: var(--champagne); }
+.hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-wpp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366; color: #fff;
+  padding: 15px 28px; border-radius: 4px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: opacity .2s;
+}
+.btn-wpp:hover { opacity: .9; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: rgba(255,255,255,0.85);
+  padding: 15px 28px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);
+  font-size: 15px; font-weight: 400; text-decoration: none;
+  transition: border-color .2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.6); }
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.scroll-hint::after { content: '↓'; font-size: 16px; }
+
+/* BANNER */
+.banner {
+  background: var(--champagne); padding: 18px 32px;
+  text-align: center; color: #1a1a1a;
+  font-size: 15px; font-weight: 500;
+}
+
+/* SECTIONS */
+.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.tag { font-size: 11px; letter-spacing: 4px; color: var(--champagne); font-weight: 500; margin-bottom: 12px; }
+h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 400; line-height: 1.25; margin-bottom: 16px; }
+.lead { font-size: 16px; color: #555; line-height: 1.8; max-width: 620px; }
+
+/* GALERIA */
+.gallery {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: 280px 220px;
+  gap: 6px;
+  margin: 48px 0;
+}
+.gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; display: block; }
+.gallery .g-main { grid-row: span 2; grid-column: span 1; }
+.gallery .g-sub { }
+
+.specs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px;
+}
+.spec {
+  background: var(--cinza-claro); border-radius: 6px; padding: 24px 20px; text-align: center;
+}
+.spec .n { font-size: 30px; font-weight: 500; color: var(--champagne); }
+.spec .l { font-size: 13px; color: #777; margin-top: 4px; }
+
+/* INCLUSO */
+.incluso-section { background: var(--cinza-claro); padding: 80px 24px; }
+.incluso-inner { max-width: 1100px; margin: 0 auto; }
+.incluso-inner .lead { margin-bottom: 40px; }
+.items-group { margin-bottom: 32px; }
+.group-label { font-size: 10px; letter-spacing: 3px; color: var(--champagne); font-weight: 600; margin-bottom: 12px; }
+.items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+.item-card {
+  background: #fff; border: 1px solid #ece9e2;
+  border-radius: 6px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 500; color: #333;
+}
+.item-icon { font-size: 18px; flex-shrink: 0; }
+.nao-incluso {
+  background: #fff; border: 1px solid #ece9e2;
+  border-radius: 8px; padding: 24px 28px; margin-top: 8px;
+}
+.nao-incluso .ni-title { font-size: 12px; color: #999; letter-spacing: 1px; margin-bottom: 14px; font-weight: 500; }
+.nao-incluso ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.nao-incluso li { font-size: 14px; color: #555; display: flex; align-items: center; gap: 10px; }
+.ni-note { font-size: 12px; color: #aaa; margin-top: 12px; font-style: italic; }
+
+/* COMO FUNCIONA */
+.steps-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+  margin-top: 48px;
+}
+@media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+.step-item { padding: 0 16px 0 0; border-right: 1px solid #ece9e2; }
+.step-item:last-child { border-right: none; padding-right: 0; }
+.step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--champagne); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 500; margin-bottom: 16px; }
+.step-item h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.step-item p { font-size: 13px; color: #666; line-height: 1.6; }
+
+/* ROI */
+.roi-section { background: var(--preto); color: #fff; padding: 80px 24px; }
+.roi-inner { max-width: 1100px; margin: 0 auto; }
+.roi-inner .tag { color: var(--champagne); }
+.roi-inner h2 { color: #fff; }
+.roi-inner .lead { color: rgba(255,255,255,0.6); }
+.roi-destaque {
+  background: rgba(201,169,110,0.12); border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 8px; padding: 28px 32px; margin: 40px 0;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.roi-val { font-size: 48px; font-weight: 300; color: var(--champagne); line-height: 1; }
+.roi-val-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.roi-val-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 400px; }
+.roi-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+.roi-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 20px; text-align: center;
+}
+.roi-card .n { font-size: 28px; font-weight: 400; color: var(--champagne); }
+.roi-card .l { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; line-height: 1.4; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px; }
+.cmp {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; padding: 20px;
+}
+.cmp.ativo { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.3); }
+.cmp .cl { font-size: 11px; color: rgba(255,255,255,0.35); margin-bottom: 6px; letter-spacing: 1px; }
+.cmp.ativo .cl { color: var(--champagne); }
+.cmp .cv { font-size: 24px; font-weight: 400; color: rgba(255,255,255,0.35); }
+.cmp.ativo .cv { color: var(--champagne); }
+.cmp .cd { font-size: 12px; color: rgba(255,255,255,0.25); margin-top: 4px; }
+.cmp.ativo .cd { color: rgba(255,255,255,0.5); }
+.difs { display: flex; flex-direction: column; gap: 14px; }
+.dif { display: flex; gap: 14px; }
+.dif-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.dif-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.dif-text strong { color: #fff; font-weight: 500; }
+
+/* GALERIA FOTOS */
+.photos-section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 40px;
+}
+.photos-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; display: block; }
+
+/* REVIEWS */
+.reviews-section { background: var(--cinza-claro); padding: 80px 24px; }
+.reviews-inner { max-width: 1100px; margin: 0 auto; }
+.selos { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0; }
+.selo {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  background: #fdf3e0; color: #8a6200; border: 1px solid #e8c96a;
+}
+.rating-row { display: flex; align-items: center; gap: 14px; margin: 24px 0 32px; }
+.big-num { font-size: 48px; font-weight: 300; color: var(--champagne); line-height: 1; }
+.stars { color: var(--champagne); font-size: 18px; letter-spacing: 2px; }
+.review-count { font-size: 13px; color: #888; margin-top: 2px; }
+.review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.review-card {
+  background: #fff; border: 1px solid #ece9e2;
+  border-radius: 8px; padding: 20px;
+}
+.rname { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.rdate { font-size: 11px; color: #aaa; margin-bottom: 12px; }
+.rtext { font-size: 14px; color: #555; line-height: 1.7; }
+.rtext::before { content: '"'; }
+.rtext::after { content: '"'; }
+
+/* CTA */
+.cta-section {
+  background: var(--preto); color: #fff;
+  padding: 100px 24px; text-align: center;
+}
+.cta-inner { max-width: 560px; margin: 0 auto; }
+.cta-section h2 { color: #fff; margin-bottom: 16px; font-size: clamp(26px, 3vw, 36px); font-weight: 300; }
+.cta-section h2 strong { font-weight: 600; color: var(--champagne); }
+.cta-section p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 40px; font-size: 16px; }
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366; color: #fff;
+  padding: 18px 36px; border-radius: 4px;
+  font-size: 16px; font-weight: 500; text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  background: #0a0a0a; color: rgba(255,255,255,0.35);
+  padding: 32px 24px; text-align: center; font-size: 13px;
+}
+footer strong { color: var(--champagne); }
+footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+footer a:hover { color: var(--champagne); }
+
+@media (max-width: 768px) {
+  .gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .gallery .g-main { grid-row: span 1; height: 260px; }
+  .specs { grid-template-columns: repeat(3, 1fr); }
+  .roi-cards { grid-template-columns: 1fr; }
+  .compare { grid-template-columns: 1fr; }
+  .review-grid { grid-template-columns: 1fr; }
+  .photos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <img src="images/logo-branco.png" alt="Biohome Construção Modular">
+  <a href="https://wa.me/5547988104334?text=Olá! Vi o site da Biohome e tenho interesse na cabana modular.">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Falar no WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Uma casa completa.<br><strong>Você só entra para morar.</strong></h1>
+    <p>69m² com tudo incluso — do fogão às placas solares.<br>Fabricada em 90 dias, entregue em todo o Brasil.</p>
+    <div class="hero-btns">
+      <a class="btn-wpp" href="https://wa.me/5547988104334?text=Olá! Vi o site da Biohome e tenho interesse na cabana modular.">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+      <a class="btn-ghost" href="#showroom">Ver showroom</a>
+    </div>
+  </div>
+  <div class="scroll-hint">ROLE PARA VER</div>
+</section>
+
+<!-- BANNER -->
+<div class="banner">✓ A casa sai da fábrica 100% pronta — você só entra para morar</div>
+
+<!-- A CABANA -->
+<section class="section">
+  <div class="tag">A CABANA</div>
+  <h2>69m² de alto padrão<br>na sua propriedade</h2>
+  <p class="lead">Deck coberto com vista para a natureza, sala integrada com painéis ripados, cozinha completa e janelas do piso ao teto. Estrutura modular com acabamento em madeira — tudo fabricado sob medida.</p>
+
+  <div class="gallery">
+    <img src="images/ext-fachada-frontal.jpg" alt="Fachada da Biohome" class="g-main">
+    <img src="images/sala.jpg" alt="Vista da cabana ao entardecer" class="g-sub">
+    <img src="images/banheiro.jpg" alt="Deck coberto com cadeiras" class="g-sub">
+    <img src="images/ext-deck-interior.jpg" alt="Deck integrado com a cozinha" class="g-sub">
+    <img src="images/cozinha2.jpg" alt="Fachada com pergolado" class="g-sub">
+  </div>
+
+  <div class="specs">
+    <div class="spec"><div class="n">69m²</div><div class="l">área coberta</div></div>
+    <div class="spec"><div class="n">90 dias</div><div class="l">de fabricação</div></div>
+    <div class="spec"><div class="n">1–2 dias</div><div class="l">de instalação</div></div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<div style="background: var(--preto); padding: 80px 24px; text-align: center;">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <div class="tag" style="color: var(--champagne); margin-bottom: 12px;">A CABANA EM MOVIMENTO</div>
+    <h2 style="color: #fff; font-weight: 300; margin-bottom: 40px;">Veja como é estar dentro da Biohome</h2>
+    <video
+      controls
+      playsinline
+      poster="images/ext-fachada-frontal.jpg"
+      style="width: 100%; max-width: 860px; border-radius: 6px; display: block; margin: 0 auto;"
+    >
+      <source src="images/biohome-web.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<!-- INCLUSO -->
+<div class="incluso-section">
+  <div class="incluso-inner">
+    <div class="tag">O QUE ESTÁ INCLUSO</div>
+    <h2>Tudo dentro da casa.<br>Literalmente.</h2>
+    <p class="lead">Nenhuma surpresa depois da entrega. Cada item abaixo já está instalado quando a casa chega no seu terreno.</p>
+
+    <div class="items-group">
+      <div class="group-label">ENERGIA E SUSTENTABILIDADE</div>
+      <div class="items-grid">
+        <div class="item-card"><span class="item-icon">☀️</span>Placas solares</div>
+        <div class="item-card"><span class="item-icon">💧</span>Aquecedor solar + gás</div>
+        <div class="item-card"><span class="item-icon">🔥</span>Boiler</div>
+        <div class="item-card"><span class="item-icon">🚿</span>Chuveiro a gás</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="group-label">COZINHA E ÁREA DE ESTAR</div>
+      <div class="items-grid">
+        <div class="item-card"><span class="item-icon">🪑</span>Móveis sob medida</div>
+        <div class="item-card"><span class="item-icon">🧊</span>Geladeira</div>
+        <div class="item-card"><span class="item-icon">🍳</span>Fogão</div>
+        <div class="item-card"><span class="item-icon">📡</span>Micro-ondas</div>
+        <div class="item-card"><span class="item-icon">🫕</span>Forno</div>
+        <div class="item-card"><span class="item-icon">🔥</span>Lareira</div>
+        <div class="item-card"><span class="item-icon">🛋️</span>Sofá</div>
+        <div class="item-card"><span class="item-icon">📺</span>Televisão</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="group-label">QUARTO E BANHEIRO</div>
+      <div class="items-grid">
+        <div class="item-card"><span class="item-icon">🛏️</span>Cama completa</div>
+        <div class="item-card"><span class="item-icon">🚿</span>Banheiro completo</div>
+        <div class="item-card"><span class="item-icon">❄️</span>Ar-condicionado</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="group-label">SEGURANÇA E ESTRUTURA</div>
+      <div class="items-grid">
+        <div class="item-card"><span class="item-icon">🔒</span>Sistema de alarme</div>
+        <div class="item-card"><span class="item-icon">📷</span>Câmeras de monitoramento</div>
+        <div class="item-card"><span class="item-icon">🪵</span>Deck</div>
+        <div class="item-card"><span class="item-icon">🏠</span>Pergolado</div>
+        <div class="item-card"><span class="item-icon">🏗️</span>Telhado com EPS</div>
+      </div>
+    </div>
+
+    <div class="nao-incluso">
+      <div class="ni-title">RESPONSABILIDADE DO COMPRADOR — PREPARAÇÃO DO TERRENO</div>
+      <ul>
+        <li>🏗️ Sapatas (enviamos o projeto com todas as medidas)</li>
+        <li>⚡ Espera de energia elétrica</li>
+        <li>💧 Espera de água e esgoto</li>
+      </ul>
+      <p class="ni-note">Enviamos o projeto completo com as medidas das sapatas para facilitar a execução.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section class="section">
+  <div class="tag">COMO FUNCIONA</div>
+  <h2>Do projeto à sua varanda</h2>
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <h3>Personalize sua casa</h3>
+      <p>Escolha acabamentos e configurações de acordo com a sua preferência.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <h3>Prepare o terreno</h3>
+      <p>Sapatas, água, energia e esgoto. Enviamos o projeto com todas as medidas.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <h3>Fabricamos em 90 dias</h3>
+      <p>Produção inteira na nossa fábrica em São Bento do Sul/SC.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <h3>Entregamos pronta</h3>
+      <p>Transportamos até o seu terreno em qualquer estado do Brasil.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <h3>Instalação em 1–2 dias</h3>
+      <p>Nossa equipe instala, conecta tudo e entrega a chave.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<div class="roi-section">
+  <div class="roi-inner">
+    <div class="tag">RETORNO SOBRE INVESTIMENTO</div>
+    <h2>Um imóvel que trabalha por você</h2>
+    <p class="lead">A Biohome não é só uma casa — é um ativo que gera renda todos os meses e ainda valoriza com o tempo.</p>
+
+    <div class="roi-destaque">
+      <div>
+        <div class="roi-val">R$ 4.638</div>
+        <div class="roi-val-label">faturamento real · junho 2026 · showroom biohome</div>
+      </div>
+      <p class="roi-val-desc">Resultado fora da alta temporada, sem dias de semana preenchidos. Dezembro e janeiro ainda estão por vir.</p>
+    </div>
+
+    <div class="roi-cards">
+      <div class="roi-card"><div class="n">R$ 350k</div><div class="l">investimento total — casa 100% equipada</div></div>
+      <div class="roi-card"><div class="n">até 2%/mês</div><div class="l">dependendo da região e ocupação</div></div>
+      <div class="roi-card"><div class="n">+ valorização</div><div class="l">do imóvel ao longo dos anos</div></div>
+    </div>
+
+    <div class="compare">
+      <div class="cmp">
+        <div class="cl">POUPANÇA</div>
+        <div class="cv">~0,7%/mês</div>
+        <div class="cd">Sem imóvel, sem valorização</div>
+      </div>
+      <div class="cmp ativo">
+        <div class="cl">BIOHOME NO AIRBNB</div>
+        <div class="cv">até 2%/mês</div>
+        <div class="cd">+ imóvel em seu nome + valorização</div>
+      </div>
+    </div>
+
+    <div class="difs">
+      <div class="dif">
+        <span class="dif-icon">🏡</span>
+        <p class="dif-text"><strong>Não precisa ter terreno.</strong> Arrende um terreno em região turística, instale a casa e comece a gerar renda imediatamente.</p>
+      </div>
+      <div class="dif">
+        <span class="dif-icon">🚛</span>
+        <p class="dif-text"><strong>O imóvel pode mudar de lugar.</strong> Por ser modular, a casa pode ser desmontada e reinstalada em outro terreno — algo impossível em construção convencional.</p>
+      </div>
+      <div class="dif">
+        <span class="dif-icon">📈</span>
+        <p class="dif-text"><strong>Alta temporada ainda por vir.</strong> O faturamento de junho é fora de dezembro e janeiro — os meses de maior demanda no Brasil.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIA -->
+<section class="photos-section" id="showroom">
+  <div class="tag">SHOWROOM</div>
+  <h2>Veja por dentro — e agende uma visita</h2>
+  <p class="lead">A cabana fica em São Bento do Sul/SC e está disponível para visitas. Você vê, toca nos materiais e entende o que está comprando.</p>
+  <div class="photos-grid">
+    <img src="images/int-sala-janela.jpg" alt="Sala com janela panorâmica para o deck">
+    <img src="images/int-tv.jpg" alt="Sala com painel ripado e TV">
+    <img src="images/int-cozinha-jantar.jpg" alt="Cozinha e jantar integrados">
+    <img src="images/int-cozinha.jpg" alt="Cozinha completa equipada">
+    <img src="images/int-banheiro.jpg" alt="Banheiro com espelho iluminado">
+    <img src="images/int-quarto.jpg" alt="Quarto com vista para o deck e natureza">
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="reviews-inner">
+    <div class="tag">AVALIAÇÕES REAIS DO AIRBNB</div>
+    <h2>Essa casa já está em uso — e quem ficou, aprovou</h2>
+    <div class="selos">
+      <span class="selo">🏆 Preferido dos hóspedes</span>
+      <span class="selo">🥇 Top 5% das acomodações</span>
+      <span class="selo">📍 Localização 5★ — 100% dos hóspedes</span>
+    </div>
+    <div class="rating-row">
+      <div class="big-num">5,0</div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div class="review-count">11 avaliações · check-in excepcional</div>
+      </div>
+    </div>
+    <div class="airbnb-cta" style="margin: 0 0 36px; padding: 20px 24px; background: #fff; border: 1px solid #ece9e2; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-size: 14px; font-weight: 600; color: #111; margin-bottom: 4px;">Experimente antes de comprar</div>
+        <div style="font-size: 13px; color: #777;">Reserve uma estadia na cabana showroom em São Bento do Sul/SC</div>
+      </div>
+      <a href="https://www.airbnb.com.br/rooms/1651556123228510993" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: #FF385C; color: #fff; padding: 11px 22px; border-radius: 4px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 16.738c-.306.566-.795.957-1.408 1.107-.174.043-.35.064-.526.064-.548 0-1.076-.193-1.557-.574-.336-.266-.678-.617-1.071-1.076-.393.459-.735.81-1.071 1.076-.481.381-1.009.574-1.557.574-.176 0-.352-.021-.526-.064-.613-.15-1.102-.541-1.408-1.107-.617-1.143-.337-2.74.831-4.468.629-.924 1.459-1.854 2.468-2.765l.03-.027.03-.027a.3.3 0 01.406 0l.03.027.03.027c1.009.911 1.839 1.841 2.468 2.765 1.168 1.728 1.448 3.325.831 4.468z"/></svg>
+        Ver no Airbnb
+      </a>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="rname">André</div>
+        <div class="rdate">1 semana atrás</div>
+        <p class="rtext">A cabana é um charme absoluto, super aconchegante, equipada e com um design inteligente que integra o espaço de forma impecável. A lareira de chão é um destaque à parte — passar a noite ao redor do fogo foi mágico.</p>
+      </div>
+      <div class="review-card">
+        <div class="rname">Laís Mariana</div>
+        <div class="rdate">2 semanas atrás</div>
+        <p class="rtext">Casa modular muito bem dimensionada, com um espaço que surpreende. Móveis modernos, decoração aconchegante, ótimo aquecimento de água e ar-condicionado. A cozinha é toda equipada. Com certeza voltaremos!</p>
+      </div>
+      <div class="review-card">
+        <div class="rname">Thiago</div>
+        <div class="rdate">abril de 2026</div>
+        <p class="rtext">O espaço é muito bonito e aconchegante — tem tudo que se possa imaginar! Super bem arejada. A vista da varanda é incrível, passamos a maior parte da estadia lá. Com certeza iremos voltar!</p>
+      </div>
+      <div class="review-card">
+        <div class="rname">João Marcos</div>
+        <div class="rdate">abril de 2026</div>
+        <p class="rtext">Local extremamente elegante e aconchegante, tudo muito novo e muito bem equipado. Certamente voltarei!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="tag" style="color:var(--champagne)">PRONTO PARA COMEÇAR?</div>
+    <h2>Fale com a gente e receba<br><strong>seu orçamento</strong></h2>
+    <p>Tire todas as suas dúvidas, conheça o showroom ou solicite um orçamento personalizado.</p>
+    <a class="btn-cta" href="https://wa.me/5547988104334?text=Olá! Quero solicitar um orçamento para a cabana Biohome.">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar orçamento
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="images/logo-laranja.png" alt="Biohome" style="height:36px;width:auto;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;"><br>
+  <span style="margin-top:8px;display:block">
+    <a href="https://instagram.com/biohome.modular">@biohome.modular</a> &nbsp;·&nbsp;
+    <a href="https://wa.me/5547988104334">(47) 98810-4334</a> &nbsp;·&nbsp;
+    <a href="mailto:contato@biohomemodular.com.br">contato@biohomemodular.com.br</a>
+  </span>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+});
+</script>
+</body>
+</html>

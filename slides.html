@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Biohome — Slides Instagram</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; font-family: -apple-system, 'Inter', sans-serif; color: #fff; padding: 40px 24px; }
+h1 { font-size: 13px; letter-spacing: 4px; color: #b8944a; font-weight: 500; margin-bottom: 8px; }
+p.sub { font-size: 12px; color: #555; margin-bottom: 48px; }
+.carousel { margin-bottom: 60px; }
+.carousel-title { font-size: 10px; letter-spacing: 3px; color: #b8944a; margin-bottom: 16px; }
+.slides-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; }
+.slides-row::-webkit-scrollbar { height: 3px; }
+.slides-row::-webkit-scrollbar-thumb { background: #333; }
+.slide-wrap { flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+canvas { width: 240px; height: 240px; border-radius: 4px; display: block; }
+.dl-btn {
+  width: 240px; padding: 8px 0; background: transparent;
+  border: 0.5px solid #333; color: #b8944a;
+  font-size: 9px; letter-spacing: 2px; font-weight: 500;
+  cursor: pointer; border-radius: 3px; transition: border-color .2s;
+}
+.dl-btn:hover { border-color: #b8944a; }
+.dl-all {
+  display: inline-block; margin-top: 48px; padding: 14px 32px;
+  background: #b8944a; color: #000; font-size: 11px; letter-spacing: 3px;
+  font-weight: 600; border: none; cursor: pointer; border-radius: 3px;
+}
+</style>
+</head>
+<body>
+
+<h1>BIOHOME — SLIDES INSTAGRAM</h1>
+<p class="sub">Clique em "BAIXAR" em cada slide para salvar em 1080×1080px</p>
+
+<div id="carousels"></div>
+
+<script>
+const W = 1080, H = 1080;
+
+const carousels = [
+  {
+    title: "CARROSSEL 01 — UMA CASA PRONTA EM 90 DIAS",
+    slides: [
+      { img: "images/ext-fachada-frontal.jpg", vignette: 0.72, overlay: 0.38,
+        eyebrow: "BIOHOME", title: "Uma casa completa.\nVocê só entra\npara morar.", cta: "DESLIZE →" },
+      { img: "images/int-cozinha-jantar.jpg", vignette: 0.68, overlay: 0.42,
+        eyebrow: "O PRODUTO", title: "69m².\nTudo incluso.", list: ["Cozinha equipada","Móveis sob medida","Placas solares","Sistema de alarme","Ar-condicionado"] },
+      { img: "images/banheiro.jpg", vignette: 0.70, overlay: 0.40,
+        eyebrow: "PROCESSO", title: "Do pedido à chave\nem sua mão.", list: ["Você prepara o terreno","Fabricamos em 90 dias","Instalação em 1–2 dias"] },
+      { bg: "#1a1a1a",
+        eyebrow: "INVESTIMENTO", title: "Solicite um orçamento\npersonalizado.", body: "Cada projeto é único.\nFale com a gente pelo link na bio.", cta: "LINK NA BIO →" },
+      { img: "images/int-sala-janela.jpg", vignette: 0.72, overlay: 0.42,
+        eyebrow: "SHOWROOM", title: "Visite antes\nde decidir.", body: "São Bento do Sul / SC\nAirbnb — nota 5,0 ★" },
+      { bg: "#000",
+        eyebrow: "CONTATO", title: "Pronto para\ncomeçar?", body: "Link na bio ou WhatsApp.\n@biohome.modular", cta: "FALAR AGORA →" },
+    ]
+  },
+  {
+    title: "CARROSSEL 02 — QUANTO RENDE NO AIRBNB",
+    slides: [
+      { img: "images/sala.jpg", vignette: 0.75, overlay: 0.40,
+        eyebrow: "RETORNO REAL", title: "Seu dinheiro\npode trabalhar\npor você.", cta: "DESLIZE →" },
+      { bg: "#1a1a1a",
+        eyebrow: "JUNHO 2026 · FORA DA ALTA", big: "R$ 4.638", bigSub: "FATURAMENTO REAL DO MÊS", body: "Sem dezembro. Sem janeiro.\nResultado do mês comum." },
+      { bg: "#000",
+        eyebrow: "RENTABILIDADE", big: "2%", bigSub: "AO MÊS · DEPENDENDO DA REGIÃO", body: "+ valorização do imóvel\nao longo dos anos." },
+      { img: "images/int-tv.jpg", vignette: 0.70, overlay: 0.44,
+        eyebrow: "DIFERENCIAL", title: "Não precisa\nter terreno.", list: ["Arrende um terreno","Instale a Biohome","Gere renda imediata","Imóvel no seu nome"] },
+      { img: "images/ext-deck-interior.jpg", vignette: 0.68, overlay: 0.38,
+        eyebrow: "PRÓXIMO PASSO", title: "Simule o retorno\nda sua região.", body: "Fala com a gente.\n@biohome.modular", cta: "LINK NA BIO →" },
+    ]
+  },
+  {
+    title: "CARROSSEL 03 — 5 PERGUNTAS ANTES DE COMPRAR",
+    slides: [
+      { img: "images/int-banheiro.jpg", vignette: 0.72, overlay: 0.42,
+        eyebrow: "DÚVIDAS FREQUENTES", title: "5 perguntas que\ntodo mundo faz\nantes de comprar.", cta: "DESLIZE →" },
+      { bg: "#1a1a1a",
+        eyebrow: "PRECISO TER TERRENO?", body: "Não. É possível arrendar\num terreno em região turística.\nO imóvel fica no seu nome." },
+      { img: "images/int-cozinha.jpg", vignette: 0.70, overlay: 0.44,
+        eyebrow: "O QUE VEM INCLUSO?", body: "Tudo. Geladeira, fogão, sofá,\ncama, TV, placas solares,\ncâmeras. Você só entra." },
+      { bg: "#000",
+        eyebrow: "QUANTO TEMPO DEMORA?", body: "90 dias de fabricação.\n1 a 2 dias de instalação.\nEntregamos em todo o Brasil." },
+      { img: "images/int-quarto.jpg", vignette: 0.72, overlay: 0.40,
+        eyebrow: "POSSO VER ANTES DE COMPRAR?", body: "Sim. Visite o showroom em\nSão Bento do Sul/SC — ou\nse hospede antes de decidir." },
+      { bg: "#1a1a1a",
+        eyebrow: "A CASA PODE MUDAR DE LUGAR?", body: "Sim. Modular significa que pode\nser desmontada e reinstalada\nem outro terreno.", cta: "@biohome.modular" },
+    ]
+  }
+];
+
+function vignette(ctx, strength) {
+  const grad = ctx.createRadialGradient(W/2, H/2, H*0.25, W/2, H/2, H*0.85);
+  grad.addColorStop(0, `rgba(0,0,0,0)`);
+  grad.addColorStop(1, `rgba(0,0,0,${strength})`);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function drawLine(ctx, x, y) {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 80, y);
+  ctx.strokeStyle = '#b8944a';
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.85;
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const lines = text.split('\n');
+  lines.forEach((line, i) => {
+    ctx.fillText(line, x, y + i * lineHeight);
+  });
+  return y + lines.length * lineHeight;
+}
+
+function drawSlide(canvas, slide) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = W; canvas.height = H;
+
+  const finish = () => {
+    const pad = 88;
+    let y = pad;
+
+    // eyebrow
+    ctx.font = '500 28px -apple-system, Inter, sans-serif';
+    ctx.fillStyle = '#b8944a';
+    ctx.letterSpacing = '8px';
+    ctx.fillText(slide.eyebrow || '', pad, y + 28);
+    y += 64;
+
+    // line
+    drawLine(ctx, pad, y);
+    y += 36;
+
+    // big number
+    if (slide.big) {
+      ctx.font = '300 180px -apple-system, Inter, sans-serif';
+      ctx.fillStyle = '#b8944a';
+      ctx.letterSpacing = '-4px';
+      ctx.fillText(slide.big, pad, y + 150);
+      y += 190;
+      ctx.font = '400 24px -apple-system, Inter, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.38)';
+      ctx.letterSpacing = '4px';
+      ctx.fillText(slide.bigSub || '', pad, y);
+      y += 56;
+    }
+
+    // title
+    if (slide.title) {
+      ctx.font = '500 72px -apple-system, Inter, sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.letterSpacing = '-1px';
+      const lines = slide.title.split('\n');
+      lines.forEach(line => {
+        ctx.fillText(line, pad, y + 72);
+        y += 82;
+      });
+      y += 8;
+    }
+
+    // list
+    if (slide.list) {
+      ctx.font = '400 36px -apple-system, Inter, sans-serif';
+      ctx.letterSpacing = '0px';
+      slide.list.forEach(item => {
+        ctx.fillStyle = '#b8944a';
+        ctx.fillText('—', pad, y + 36);
+        ctx.fillStyle = 'rgba(255,255,255,0.58)';
+        ctx.fillText(item, pad + 52, y + 36);
+        y += 52;
+      });
+    }
+
+    // body
+    if (slide.body) {
+      ctx.font = '400 36px -apple-system, Inter, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.letterSpacing = '0px';
+      slide.body.split('\n').forEach(line => {
+        ctx.fillText(line, pad, y + 36);
+        y += 48;
+      });
+    }
+
+    // cta bottom
+    if (slide.cta) {
+      ctx.font = '500 26px -apple-system, Inter, sans-serif';
+      ctx.fillStyle = '#b8944a';
+      ctx.letterSpacing = '6px';
+      ctx.fillText(slide.cta, pad, H - pad);
+    }
+
+    // logo bottom right
+    ctx.font = '500 24px -apple-system, Inter, sans-serif';
+    ctx.fillStyle = 'rgba(184,148,74,0.5)';
+    ctx.letterSpacing = '4px';
+    ctx.textAlign = 'right';
+    ctx.fillText('BIOHOME.MODULAR', W - pad, H - pad);
+    ctx.textAlign = 'left';
+  };
+
+  if (slide.img) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      // cover fit
+      const scale = Math.max(W / img.width, H / img.height);
+      const sw = img.width * scale, sh = img.height * scale;
+      ctx.drawImage(img, (W - sw) / 2, (H - sh) / 2, sw, sh);
+      // dark overlay
+      ctx.fillStyle = `rgba(0,0,0,${slide.overlay || 0.4})`;
+      ctx.fillRect(0, 0, W, H);
+      // vignette
+      vignette(ctx, slide.vignette || 0.7);
+      finish();
+    };
+    img.onerror = () => {
+      ctx.fillStyle = '#1a1a1a';
+      ctx.fillRect(0, 0, W, H);
+      finish();
+    };
+    img.src = slide.img;
+  } else {
+    ctx.fillStyle = slide.bg || '#000';
+    ctx.fillRect(0, 0, W, H);
+    finish();
+  }
+}
+
+const container = document.getElementById('carousels');
+
+carousels.forEach(car => {
+  const section = document.createElement('div');
+  section.className = 'carousel';
+
+  const title = document.createElement('div');
+  title.className = 'carousel-title';
+  title.textContent = car.title;
+  section.appendChild(title);
+
+  const row = document.createElement('div');
+  row.className = 'slides-row';
+
+  car.slides.forEach((slide, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'slide-wrap';
+
+    const canvas = document.createElement('canvas');
+    wrap.appendChild(canvas);
+
+    const btn = document.createElement('button');
+    btn.className = 'dl-btn';
+    btn.textContent = 'BAIXAR SLIDE';
+    btn.onclick = () => {
+      const link = document.createElement('a');
+      link.download = `biohome-slide-${car.title.slice(-2).trim()}-${i+1}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    };
+    wrap.appendChild(btn);
+    row.appendChild(wrap);
+
+    drawSlide(canvas, slide);
+  });
+
+  section.appendChild(row);
+  container.appendChild(section);
+});
+</script>
+</body>
+</html>

@@ -29,6 +29,39 @@
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 
 <link rel="preload" as="image" href="images/fachada.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Biohome Construção Modular",
+  "description": "Cabana modular 69m² entregue 100% pronta em 90 dias. Móveis, eletrodomésticos, placas solares e ar-condicionado inclusos. Fabricada em Rio Negrinho/SC, entregue em todo o Brasil.",
+  "url": "https://biohomemodular.com.br",
+  "telephone": "+5547988104334",
+  "email": "biohome.modular@gmail.com",
+  "image": "https://biohomemodular.com.br/images/ext-fachada-frontal.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "R. Maestro Max Jakuch, 187",
+    "addressLocality": "Rio Negrinho",
+    "addressRegion": "SC",
+    "postalCode": "89295-000",
+    "addressCountry": "BR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -26.2567,
+    "longitude": -49.5228
+  },
+  "sameAs": ["https://instagram.com/biohome.modular"],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "11",
+    "bestRating": "5"
+  },
+  "priceRange": "R$ 350.000"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -68,7 +101,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; colo
   font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
   background: #25D366; padding: 10px 20px; border-radius: 4px; font-weight: 500;
 }
-@media (max-width: 900px) { .navbar-links { display: none; } }
+@media (max-width: 900px) { .navbar-links { display: none; } .nav-wpp { font-size: 13px; padding: 8px 14px; } }
 
 /* HERO */
 .hero {
@@ -204,7 +237,8 @@ h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 400; line-height: 1.25; mar
 .obra-col-right .obra-col-title { color: #fff; }
 @media (max-width: 768px) {
   .obra-cols { grid-template-columns: 1fr; }
-  .obra-col-right { border-radius: 0 0 8px 8px; }
+  .obra-col-right { border-radius: 0 0 8px 8px; order: -1; }
+  .obra-col-left { border-radius: 0 0 8px 8px; }
   .obra-col { padding: 36px 24px; }
 }
 
@@ -394,7 +428,7 @@ footer a:hover { color: var(--champagne); }
 @media (max-width: 768px) {
   .navbar { padding: 16px 20px; }
   .navbar img { height: 26px; }
-  .navbar a { display: none; }
+  .nav-link { display: none; }
   .gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
   .gallery .g-main { grid-row: span 1; height: 260px; }
   .specs { grid-template-columns: repeat(3, 1fr); }
@@ -679,8 +713,8 @@ footer a:hover { color: var(--champagne); }
     </div>
 
     <div class="roi-cards">
-      <div class="roi-card"><div class="n">sob consulta</div><div class="l">investimento total — casa 100% equipada</div></div>
-      <div class="roi-card"><div class="n">até 2%/mês</div><div class="l">dependendo da região e ocupação</div></div>
+      <div class="roi-card"><div class="n">R$ 350 mil</div><div class="l">investimento total — casa 100% equipada</div></div>
+      <div class="roi-card"><div class="n">2%/mês ou mais</div><div class="l">dependendo da região e período de locação</div></div>
       <div class="roi-card"><div class="n">+ valorização</div><div class="l">do imóvel ao longo dos anos</div></div>
     </div>
 
@@ -692,7 +726,7 @@ footer a:hover { color: var(--champagne); }
       </div>
       <div class="cmp ativo">
         <div class="cl">BIOHOME NO AIRBNB</div>
-        <div class="cv">até 2%/mês</div>
+        <div class="cv">2%/mês ou mais</div>
         <div class="cd">+ imóvel em seu nome + valorização</div>
       </div>
     </div>
@@ -723,6 +757,7 @@ footer a:hover { color: var(--champagne); }
     <video
       controls
       playsinline
+      poster="images/historia-poster.jpg"
       style="width: 100%; max-width: 680px; border-radius: 6px; display: block; margin: 0 auto;"
     >
       <source src="images/biohome-historia.mp4" type="video/mp4">
@@ -849,7 +884,7 @@ footer a:hover { color: var(--champagne); }
     <p>Entre em contato agora para garantir sua data de entrega e receber um orçamento personalizado para o seu terreno.</p>
     <a class="btn-cta" href="https://wa.me/5547988104334?text=Olá! Quero iniciar meu projeto Biohome e garantir minha data de entrega.">
       <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Verificar disponibilidade
+      Solicitar orçamento gratuito
     </a>
     <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.3);">Resposta em até 24h · Sem compromisso</p>
   </div>

@@ -163,6 +163,42 @@ h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 400; line-height: 1.25; mar
 .nao-incluso li { font-size: 14px; color: #555; display: flex; align-items: center; gap: 10px; }
 .ni-note { font-size: 12px; color: #aaa; margin-top: 12px; font-style: italic; }
 
+/* ESQUECA A OBRA */
+.obra-section { background: #0d0d0d; padding: 100px 24px; }
+.obra-inner { max-width: 1100px; margin: 0 auto; }
+.obra-header { text-align: center; margin-bottom: 72px; }
+.obra-header .tag { color: var(--champagne); margin-bottom: 16px; }
+.obra-header h2 { color: #fff; font-size: clamp(28px, 3.5vw, 42px); font-weight: 300; line-height: 1.2; }
+.obra-header h2 strong { font-weight: 600; color: var(--champagne); }
+.obra-header p { color: rgba(255,255,255,0.45); font-size: 16px; line-height: 1.8; max-width: 540px; margin: 16px auto 0; }
+.obra-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 8px; overflow: hidden; }
+.obra-col { padding: 48px 40px; }
+.obra-col-left { background: #141414; }
+.obra-col-right { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2); border-radius: 0 8px 8px 0; }
+.obra-col-label { font-size: 10px; letter-spacing: 4px; font-weight: 600; margin-bottom: 28px; }
+.obra-col-left .obra-col-label { color: #555; }
+.obra-col-right .obra-col-label { color: var(--champagne); }
+.obra-stat { margin-bottom: 32px; }
+.obra-stat-num { font-size: 48px; font-weight: 300; line-height: 1; }
+.obra-col-left .obra-stat-num { color: rgba(255,255,255,0.2); }
+.obra-col-right .obra-stat-num { color: var(--champagne); }
+.obra-stat-desc { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; line-height: 1.5; }
+.obra-col-right .obra-stat-desc { color: rgba(255,255,255,0.55); }
+.obra-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 28px 0; }
+.obra-list { display: flex; flex-direction: column; gap: 10px; }
+.obra-list-item { font-size: 13px; color: rgba(255,255,255,0.3); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.obra-list-item::before { content: '—'; color: rgba(255,255,255,0.12); flex-shrink: 0; }
+.obra-list-right { color: rgba(255,255,255,0.65); }
+.obra-list-right::before { content: '✓'; color: var(--champagne); flex-shrink: 0; }
+.obra-col-title { font-size: 18px; font-weight: 500; margin-bottom: 20px; }
+.obra-col-left .obra-col-title { color: rgba(255,255,255,0.3); }
+.obra-col-right .obra-col-title { color: #fff; }
+@media (max-width: 768px) {
+  .obra-cols { grid-template-columns: 1fr; }
+  .obra-col-right { border-radius: 0 0 8px 8px; }
+  .obra-col { padding: 36px 24px; }
+}
+
 /* COMO FUNCIONA */
 .steps-grid {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
@@ -330,6 +366,95 @@ footer a:hover { color: var(--champagne); }
 
 <!-- BANNER -->
 <div class="banner">✓ A casa sai da fábrica 100% pronta — você só entra para morar</div>
+
+<!-- ESQUECA A OBRA -->
+<div class="obra-section">
+  <div class="obra-inner">
+    <div class="obra-header">
+      <div class="tag">POR QUE MODULAR</div>
+      <h2>Esqueça a obra.<br><strong>Totalmente.</strong></h2>
+      <p>Construir uma casa convencional significa anos de stress, dezenas de pessoas para coordenar e um orçamento que nunca fecha.</p>
+    </div>
+
+    <div class="obra-cols">
+      <div class="obra-col obra-col-left">
+        <div class="obra-col-label">CONSTRUÇÃO CONVENCIONAL</div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">+30</div>
+          <div class="obra-stat-desc">profissionais para contratar, negociar e coordenar — arquiteto, engenheiros, mestre de obras, pedreiros, eletricista, encanador, gesseiro, azulejista, pintor, marceneiro, serralheiro, vidraceiro, impermeabilizador e mais</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">18–24</div>
+          <div class="obra-stat-desc">meses de obra, em média — com sorte. Cada atraso de um prestador trava todos os outros.</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">∞</div>
+          <div class="obra-stat-desc">visitas à obra. Fins de semana perdidos conferindo se o pedreiro apareceu, se o material chegou, se está correto.</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-col-title">O que te espera</div>
+        <div class="obra-list">
+          <div class="obra-list-item">Dias de chuva parando tudo — obra a céu aberto não produz</div>
+          <div class="obra-list-item">Pedreiro com agenda para daqui 3 meses — e que some no meio da obra</div>
+          <div class="obra-list-item">Falta de material atrasando etapas inteiras</div>
+          <div class="obra-list-item">Notas fiscais de material de construção que parecem não acabar</div>
+          <div class="obra-list-item">Retrabalho: o azulejista refaz o que o encanador errou</div>
+          <div class="obra-list-item">Imprevistos de obra: solo diferente, estrutura errada, infiltração</div>
+          <div class="obra-list-item">Despachante na prefeitura para aprovação de alvará</div>
+          <div class="obra-list-item">Homologação de energia solar separada</div>
+          <div class="obra-list-item">Ligação de energia e água — concessionárias com prazo próprio</div>
+          <div class="obra-list-item">Limpeza pós-obra — empresa especializada, mais um custo</div>
+        </div>
+      </div>
+
+      <div class="obra-col obra-col-right">
+        <div class="obra-col-label">BIOHOME</div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">1</div>
+          <div class="obra-stat-desc">único contato do início ao fim — você fala com a Biohome e nós cuidamos de tudo. Nenhuma negociação com terceiros.</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">90</div>
+          <div class="obra-stat-desc">dias de fabricação em fábrica fechada, com clima controlado — chuva não para nossa produção.</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-stat">
+          <div class="obra-stat-num">1–2</div>
+          <div class="obra-stat-desc">dias para instalação no seu terreno. Nossa equipe vai até você, monta tudo e entrega a chave.</div>
+        </div>
+
+        <div class="obra-divider"></div>
+
+        <div class="obra-col-title">O que você recebe</div>
+        <div class="obra-list">
+          <div class="obra-list-item obra-list-right">Móveis, eletrodomésticos e decoração já instalados</div>
+          <div class="obra-list-item obra-list-right">Placas solares, câmeras e alarme configurados</div>
+          <div class="obra-list-item obra-list-right">Preço fechado — sem surpresas no orçamento</div>
+          <div class="obra-list-item obra-list-right">Prazo garantido em contrato</div>
+          <div class="obra-list-item obra-list-right">Entrega em qualquer estado do Brasil</div>
+          <div class="obra-list-item obra-list-right">Você prepara só as sapatas — nós enviamos o projeto</div>
+          <div class="obra-list-item obra-list-right">Zero visitas de acompanhamento necessárias</div>
+          <div class="obra-list-item obra-list-right">Pode ser reinstalada em outro terreno no futuro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- A CABANA -->
 <section class="section">

@@ -323,6 +323,20 @@ footer strong { color: var(--champagne); }
 footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
 footer a:hover { color: var(--champagne); }
 
+/* FAQ */
+.faq-item { border-bottom: 1px solid #e5e2db; }
+.faq-q {
+  width: 100%; background: none; border: none; text-align: left;
+  padding: 22px 0; font-size: 15px; font-weight: 500; color: #111;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-family: inherit;
+}
+.faq-q:hover { color: var(--champagne-escuro); }
+.faq-icon { font-size: 20px; color: var(--champagne); flex-shrink: 0; transition: transform .25s; }
+.faq-a { font-size: 14px; color: #555; line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .25s; }
+.faq-a.open { max-height: 400px; padding-bottom: 20px; }
+.faq-icon.open { transform: rotate(45deg); }
+
 /* SCROLL ANIMATIONS */
 .fade-up { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -412,7 +426,7 @@ footer a:hover { color: var(--champagne); }
 </section>
 
 <!-- BANNER -->
-<div class="banner">✓ A casa sai da fábrica 100% pronta — você só entra para morar</div>
+<div class="banner">⭐ 5,0 no Airbnb · 11 avaliações · Preferido dos hóspedes · Top 5% das acomodações do Brasil</div>
 
 <!-- ESQUECA A OBRA -->
 <div class="obra-section">
@@ -651,7 +665,7 @@ footer a:hover { color: var(--champagne); }
     </div>
 
     <div class="roi-cards">
-      <div class="roi-card"><div class="n">R$ 350k</div><div class="l">investimento total — casa 100% equipada</div></div>
+      <div class="roi-card"><div class="n">sob consulta</div><div class="l">investimento total — casa 100% equipada</div></div>
       <div class="roi-card"><div class="n">até 2%/mês</div><div class="l">dependendo da região e ocupação</div></div>
       <div class="roi-card"><div class="n">+ valorização</div><div class="l">do imóvel ao longo dos anos</div></div>
     </div>
@@ -769,6 +783,15 @@ footer a:hover { color: var(--champagne); }
   </div>
 </div>
 
+<!-- FAQ -->
+<div style="background: var(--cinza-claro); padding: 80px 24px;">
+  <div style="max-width: 720px; margin: 0 auto;">
+    <div class="tag" style="margin-bottom: 12px;">DÚVIDAS FREQUENTES</div>
+    <h2 style="margin-bottom: 48px;">Perguntas antes de comprar</h2>
+    <div id="faq-list"></div>
+  </div>
+</div>
+
 <!-- CTA -->
 <div class="cta-section">
   <div class="cta-inner">
@@ -806,6 +829,34 @@ footer a:hover { color: var(--champagne); }
 </div>
 
 <script>
+// FAQ
+const faqs = [
+  { q: 'Preciso ter um terreno para comprar a Biohome?', a: 'Não necessariamente. É possível arrendar um terreno em região turística, instalar a Biohome e gerar renda imediatamente. O imóvel fica registrado no seu nome.' },
+  { q: 'O que vem incluso na entrega?', a: 'Tudo. A casa chega com móveis sob medida, geladeira, fogão, micro-ondas, forno, sofá, cama, TV, ar-condicionado, lareira, placas solares, aquecedor solar, câmeras de monitoramento e sistema de alarme. Você só entra para morar.' },
+  { q: 'Quanto tempo leva do pedido à entrega?', a: 'A fabricação leva 3 meses em nossa fábrica em Rio Negrinho/SC. A instalação no seu terreno é feita em 1 a 2 dias pela nossa equipe. Prazo garantido em contrato.' },
+  { q: 'Posso visitar a casa antes de comprar?', a: 'Sim. Temos um showroom em São Bento do Sul/SC disponível para visitas. Você vê, toca nos materiais e entende exatamente o que está comprando. Também é possível se hospedar antes de decidir — a cabana está no Airbnb com nota 5,0.' },
+  { q: 'A casa pode ser movida para outro terreno no futuro?', a: 'Sim. Por ser modular, a Biohome pode ser desmontada e reinstalada em outro local. Isso é algo impossível em uma construção convencional — e uma das maiores vantagens do sistema modular.' },
+  { q: 'O que eu preciso preparar no terreno?', a: 'Apenas 3 pontos de infraestrutura: as sapatas de fundação (enviamos o projeto completo com medidas), a entrada de energia elétrica e a chegada de água e esgoto. Nossa equipe cuida de todo o restante.' },
+];
+const faqList = document.getElementById('faq-list');
+if (faqList) {
+  faqs.forEach(({ q, a }) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `<button class="faq-q">${q}<span class="faq-icon">+</span></button><div class="faq-a">${a}</div>`;
+    const btn = item.querySelector('.faq-q');
+    const ans = item.querySelector('.faq-a');
+    const icon = item.querySelector('.faq-icon');
+    btn.onclick = () => {
+      const isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.faq-icon').forEach(el => el.classList.remove('open'));
+      if (!isOpen) { ans.classList.add('open'); icon.classList.add('open'); }
+    };
+    faqList.appendChild(item);
+  });
+}
+
 // Navbar scroll
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);

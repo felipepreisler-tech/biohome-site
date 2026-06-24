@@ -28,6 +28,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 
+<link rel="preload" as="image" href="images/fachada.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -322,6 +323,52 @@ footer strong { color: var(--champagne); }
 footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
 footer a:hover { color: var(--champagne); }
 
+/* SCROLL ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: 4px; }
+.lightbox-close {
+  position: fixed; top: 20px; right: 24px;
+  color: rgba(255,255,255,0.6); font-size: 32px; cursor: pointer; line-height: 1;
+  background: none; border: none;
+}
+.lightbox-prev, .lightbox-next {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.1); border: none; color: #fff;
+  font-size: 24px; padding: 16px 12px; cursor: pointer; border-radius: 4px;
+  transition: background .2s;
+}
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.2); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.photos-grid img { cursor: zoom-in; transition: transform .3s; }
+.photos-grid img:hover { transform: scale(1.02); }
+.gallery img { cursor: zoom-in; transition: transform .3s; }
+.gallery img:hover { transform: scale(1.02); }
+
+/* REVIEWS CAROUSEL */
+.review-grid {
+  display: flex; gap: 16px;
+  overflow-x: auto; padding-bottom: 16px; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.review-grid::-webkit-scrollbar { height: 3px; }
+.review-grid::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+.review-card {
+  background: #fff; border: 1px solid #ece9e2;
+  border-radius: 8px; padding: 20px;
+  min-width: 300px; max-width: 340px; flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
 @media (max-width: 768px) {
   .navbar { padding: 16px 20px; }
   .navbar img { height: 26px; }
@@ -331,8 +378,8 @@ footer a:hover { color: var(--champagne); }
   .specs { grid-template-columns: repeat(3, 1fr); }
   .roi-cards { grid-template-columns: 1fr; }
   .compare { grid-template-columns: 1fr; }
-  .review-grid { grid-template-columns: 1fr; }
   .photos-grid { grid-template-columns: repeat(2, 1fr); }
+  .review-card { min-width: 260px; }
 }
 </style>
 </head>
@@ -477,12 +524,12 @@ footer a:hover { color: var(--champagne); }
   <h2>69m² de alto padrão<br>na sua propriedade</h2>
   <p class="lead">Deck coberto com vista para a natureza, sala integrada com painéis ripados, cozinha completa e janelas do piso ao teto. Estrutura modular com acabamento em madeira — tudo fabricado sob medida.</p>
 
-  <div class="gallery">
-    <img src="images/ext-fachada-frontal.jpg" alt="Fachada da Biohome" class="g-main">
-    <img src="images/sala.jpg" alt="Vista da cabana ao entardecer" class="g-sub">
-    <img src="images/banheiro.jpg" alt="Deck coberto com cadeiras" class="g-sub">
-    <img src="images/ext-deck-interior.jpg" alt="Deck integrado com a cozinha" class="g-sub">
-    <img src="images/cozinha2.jpg" alt="Fachada com pergolado" class="g-sub">
+  <div class="gallery" id="main-gallery">
+    <img src="images/ext-fachada-frontal.jpg" alt="Fachada da Biohome" class="g-main" loading="lazy">
+    <img src="images/sala.jpg" alt="Vista da cabana ao entardecer" class="g-sub" loading="lazy">
+    <img src="images/banheiro.jpg" alt="Deck coberto com cadeiras" class="g-sub" loading="lazy">
+    <img src="images/ext-deck-interior.jpg" alt="Deck integrado com a cozinha" class="g-sub" loading="lazy">
+    <img src="images/cozinha2.jpg" alt="Fachada com pergolado" class="g-sub" loading="lazy">
   </div>
 
   <div class="specs">
@@ -660,13 +707,13 @@ footer a:hover { color: var(--champagne); }
   <div class="tag">SHOWROOM</div>
   <h2>Veja por dentro — e agende uma visita</h2>
   <p class="lead">A cabana fica em São Bento do Sul/SC e está disponível para visitas. Você vê, toca nos materiais e entende o que está comprando.</p>
-  <div class="photos-grid">
-    <img src="images/int-sala-janela.jpg" alt="Sala com janela panorâmica para o deck">
-    <img src="images/int-tv.jpg" alt="Sala com painel ripado e TV">
-    <img src="images/int-cozinha-jantar.jpg" alt="Cozinha e jantar integrados">
-    <img src="images/int-cozinha.jpg" alt="Cozinha completa equipada">
-    <img src="images/int-banheiro.jpg" alt="Banheiro com espelho iluminado">
-    <img src="images/int-quarto.jpg" alt="Quarto com vista para o deck e natureza">
+  <div class="photos-grid" id="lightbox-gallery">
+    <img src="images/int-sala-janela.jpg" alt="Sala com janela panorâmica para o deck" loading="lazy">
+    <img src="images/int-tv.jpg" alt="Sala com painel ripado e TV" loading="lazy">
+    <img src="images/int-cozinha-jantar.jpg" alt="Cozinha e jantar integrados" loading="lazy">
+    <img src="images/int-cozinha.jpg" alt="Cozinha completa equipada" loading="lazy">
+    <img src="images/int-banheiro.jpg" alt="Banheiro com espelho iluminado" loading="lazy">
+    <img src="images/int-quarto.jpg" alt="Quarto com vista para o deck e natureza" loading="lazy">
   </div>
 </section>
 
@@ -750,9 +797,66 @@ footer a:hover { color: var(--champagne); }
   </span>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">×</button>
+  <button class="lightbox-prev" id="lb-prev">‹</button>
+  <img src="" alt="" id="lb-img">
+  <button class="lightbox-next" id="lb-next">›</button>
+</div>
+
 <script>
+// Navbar scroll
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.section, .incluso-section, .obra-section, .roi-section, .photos-section, .reviews-section, .cta-section, .obra-cols, .specs, .steps-grid, .review-grid, .photos-grid, .gallery, .roi-destaque, .roi-cards').forEach(el => {
+  el.classList.add('fade-up');
+  observer.observe(el);
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let lbImages = [], lbIndex = 0;
+
+function openLightbox(imgs, idx) {
+  lbImages = imgs; lbIndex = idx;
+  lbImg.src = lbImages[lbIndex];
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbNext() { lbIndex = (lbIndex + 1) % lbImages.length; lbImg.src = lbImages[lbIndex]; }
+function lbPrev() { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; lbImg.src = lbImages[lbIndex]; }
+
+document.getElementById('lb-close').onclick = closeLightbox;
+document.getElementById('lb-next').onclick = (e) => { e.stopPropagation(); lbNext(); };
+document.getElementById('lb-prev').onclick = (e) => { e.stopPropagation(); lbPrev(); };
+lb.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lbNext();
+  if (e.key === 'ArrowLeft') lbPrev();
+});
+
+// Wire up gallery images
+['lightbox-gallery', 'main-gallery'].forEach(id => {
+  const grid = document.getElementById(id);
+  if (!grid) return;
+  const imgs = [...grid.querySelectorAll('img')].map(i => i.src);
+  grid.querySelectorAll('img').forEach((img, i) => {
+    img.onclick = () => openLightbox(imgs, i);
+  });
 });
 </script>
 </body>

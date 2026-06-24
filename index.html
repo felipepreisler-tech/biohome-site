@@ -56,11 +56,19 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; colo
 }
 .navbar.scrolled { background: var(--preto); padding: 14px 40px; }
 .navbar img { height: 32px; width: auto; }
-.navbar a {
+.navbar-links { display: flex; gap: 28px; align-items: center; }
+.nav-link {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.3px;
+  transition: color .2s;
+}
+.nav-link:hover { color: #fff; }
+.nav-wpp {
   color: rgba(255,255,255,0.85); text-decoration: none;
   font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
   background: #25D366; padding: 10px 20px; border-radius: 4px; font-weight: 500;
 }
+@media (max-width: 900px) { .navbar-links { display: none; } }
 
 /* HERO */
 .hero {
@@ -402,7 +410,13 @@ footer a:hover { color: var(--champagne); }
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <img src="images/logo-branco.png" alt="Biohome Construção Modular">
-  <a href="https://wa.me/5547988104334?text=Olá! Vi o site da Biohome e tenho interesse na cabana modular.">
+  <div class="navbar-links">
+    <a href="#cabana" class="nav-link">A Cabana</a>
+    <a href="#como-funciona" class="nav-link">Como Funciona</a>
+    <a href="#roi" class="nav-link">Investimento</a>
+    <a href="#showroom" class="nav-link">Showroom</a>
+  </div>
+  <a class="nav-wpp" href="https://wa.me/5547988104334?text=Olá! Vi o site da Biohome e tenho interesse na cabana modular.">
     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Falar no WhatsApp
   </a>
@@ -517,7 +531,7 @@ footer a:hover { color: var(--champagne); }
 </div>
 
 <!-- A CABANA -->
-<section class="section">
+<section class="section" id="cabana">
   <div class="tag">A CABANA</div>
   <h2>69m² de alto padrão<br>na sua propriedade</h2>
   <p class="lead">Deck coberto com vista para a natureza, sala integrada com painéis ripados, cozinha completa e janelas do piso ao teto. Estrutura modular com acabamento em madeira — tudo fabricado sob medida.</p>
@@ -554,7 +568,7 @@ footer a:hover { color: var(--champagne); }
 </div>
 
 <!-- COMO FUNCIONA -->
-<section class="section">
+<section class="section" id="como-funciona">
   <div class="tag">COMO FUNCIONA</div>
   <h2>Do projeto à sua varanda</h2>
   <div class="steps-grid">
@@ -638,19 +652,19 @@ footer a:hover { color: var(--champagne); }
     </div>
 
     <div class="nao-incluso">
-      <div class="ni-title">RESPONSABILIDADE DO COMPRADOR — PREPARAÇÃO DO TERRENO</div>
+      <div class="ni-title">SUA ÚNICA RESPONSABILIDADE — 3 PONTOS DE INFRAESTRUTURA SIMPLES</div>
       <ul>
-        <li>🏗️ Sapatas (enviamos o projeto com todas as medidas)</li>
-        <li>⚡ Espera de energia elétrica</li>
-        <li>💧 Espera de água e esgoto</li>
+        <li>🏗️ Sapatas de fundação — enviamos o projeto completo com todas as medidas</li>
+        <li>⚡ Entrada de energia elétrica no terreno</li>
+        <li>💧 Chegada de água e esgoto</li>
       </ul>
-      <p class="ni-note">Enviamos o projeto completo com as medidas das sapatas para facilitar a execução.</p>
+      <p class="ni-note">São as mesmas exigências de qualquer construção. Nossa equipe orienta cada etapa.</p>
     </div>
   </div>
 </div>
 
 <!-- ROI -->
-<div class="roi-section">
+<div class="roi-section" id="roi">
   <div class="roi-inner">
     <div class="tag">RETORNO SOBRE INVESTIMENTO</div>
     <h2>Um imóvel que trabalha por você</h2>
@@ -795,13 +809,14 @@ footer a:hover { color: var(--champagne); }
 <!-- CTA -->
 <div class="cta-section">
   <div class="cta-inner">
-    <div class="tag" style="color:var(--champagne)">PRONTO PARA COMEÇAR?</div>
-    <h2>Fale com a gente e receba<br><strong>seu orçamento</strong></h2>
-    <p>Tire todas as suas dúvidas, conheça o showroom ou solicite um orçamento personalizado.</p>
-    <a class="btn-cta" href="https://wa.me/5547988104334?text=Olá! Quero solicitar um orçamento para a cabana Biohome.">
+    <div class="tag" style="color:var(--champagne)">VAGAS LIMITADAS</div>
+    <h2>Capacidade para <strong>4 projetos</strong><br>por trimestre</h2>
+    <p>Para garantir qualidade e prazo, produzimos em lotes controlados. Fale com a gente agora e verifique a disponibilidade para o próximo ciclo.</p>
+    <a class="btn-cta" href="https://wa.me/5547988104334?text=Olá! Quero verificar a disponibilidade e iniciar meu projeto Biohome.">
       <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Solicitar orçamento
+      Verificar disponibilidade
     </a>
+    <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.3);">Resposta em até 24h · Sem compromisso</p>
   </div>
 </div>
 
@@ -812,11 +827,14 @@ footer a:hover { color: var(--champagne); }
 
 <!-- FOOTER -->
 <footer>
-  <img src="images/logo-laranja.png" alt="Biohome" style="height:36px;width:auto;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;"><br>
+  <img src="images/logo-laranja.png" alt="Biohome" style="height:36px;width:auto;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;">
   <span style="margin-top:8px;display:block">
     <a href="https://instagram.com/biohome.modular">@biohome.modular</a> &nbsp;·&nbsp;
     <a href="https://wa.me/5547988104334">(47) 98810-4334</a> &nbsp;·&nbsp;
     <a href="mailto:contato@biohomemodular.com.br">contato@biohomemodular.com.br</a>
+  </span>
+  <span style="display:block;margin-top:12px;font-size:11px;color:rgba(255,255,255,0.2)">
+    Biohome Construção Modular · Rio Negrinho/SC · CNPJ 00.000.000/0001-00
   </span>
 </footer>
 
